@@ -13,9 +13,10 @@
   justify-content: center;
   margin-bottom: $spacing-xs;
   width: 100%;
+  text-overflow: ellipsis;
 
   > * {
-    display: flex;
+    display: inline;
     flex-direction: column;
     justify-content: center;
   }
@@ -43,4 +44,12 @@
   font-weight: 300;
   font-size: 1rem;
   color: $gray80;
+}
+
+.mark-as-finished {
+  color: $green;
+}
+
+.finished-date {
+  color: $pink-accent;
 }
