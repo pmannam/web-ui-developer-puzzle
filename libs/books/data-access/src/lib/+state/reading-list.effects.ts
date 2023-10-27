@@ -19,7 +19,7 @@ export class ReadingListEffects implements OnInitEffects {
               ReadingListActions.loadReadingListSuccess({ list: data })
             ),
             catchError((error) =>
-              of(ReadingListActions.loadReadingListError({ error }))
+              of(ReadingListActions.loadReadingListError({ error: okReadsConstant.API_FAILURE}))
             )
           )
       )
@@ -41,7 +41,7 @@ export class ReadingListEffects implements OnInitEffects {
               ReadingListActions.confirmedAddToReadingList({ book: addedBook })
             ),
             catchError((error) =>
-              of(ReadingListActions.failedAddToReadingList({ error }))
+              of(ReadingListActions.failedAddToReadingList({ error: okReadsConstant.API_FAILURE }))
             )
           );
       })
@@ -59,7 +59,7 @@ export class ReadingListEffects implements OnInitEffects {
               ReadingListActions.confirmedRemoveFromReadingList({ item })
             ),
             catchError((error) =>
-              of(ReadingListActions.failedRemoveFromReadingList({ error }))
+              of(ReadingListActions.failedRemoveFromReadingList({ error: okReadsConstant.API_FAILURE }))
             )
           )
       )

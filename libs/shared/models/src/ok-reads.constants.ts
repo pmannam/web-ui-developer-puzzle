@@ -27,5 +27,6 @@ export const okReadsConstant = {
     MY_READING_LIST: 'My Reading List',
     CLOSE: 'close',
     NO_AUTHOR_MENTIONED: "Author's name not avaliable",
-    ERROR_TEXT: 'Sorry something went wrong!'
+    ERROR_TEXT: 'Sorry something went wrong!',
+    API_FAILURE: 'ERROR! API request Failed'
 }
