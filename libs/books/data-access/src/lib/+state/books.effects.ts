@@ -17,7 +17,7 @@ export class BooksEffects {
           .pipe(
             map((data) => BooksActions.searchBooksSuccess({ books: data })),
             catchError((error) =>
-              of(BooksActions.searchBooksFailure({ error }))
+              of(BooksActions.searchBooksFailure({ error: okReadsConstant.ERROR_TEXT }))
             )
           )
       )

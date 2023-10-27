@@ -19,7 +19,7 @@ export class ReadingListEffects implements OnInitEffects {
               ReadingListActions.loadReadingListSuccess({ list: data })
             ),
             catchError((error) =>
-              of(ReadingListActions.loadReadingListError({ error }))
+              of(ReadingListActions.loadReadingListError({ error: okReadsConstant.ERROR_TEXT }))
             )
           )
       )
@@ -41,7 +41,7 @@ export class ReadingListEffects implements OnInitEffects {
               ReadingListActions.confirmedAddToReadingList({ book: addedBook })
             ),
             catchError((error) =>
-              of(ReadingListActions.failedAddToReadingList({ error }))
+              of(ReadingListActions.failedAddToReadingList({ error: okReadsConstant.ERROR_TEXT }))
             )
           );
       })
@@ -59,10 +59,42 @@ export class ReadingListEffects implements OnInitEffects {
               ReadingListActions.confirmedRemoveFromReadingList({ item })
             ),
             catchError((error) =>
-              of(ReadingListActions.failedRemoveFromReadingList({ error }))
+              of(ReadingListActions.failedRemoveFromReadingList({ error: okReadsConstant.ERROR_TEXT }))
             )
           )
       )
+    )
+  );
+
+  markBookAsFinished$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ReadingListActions.markBookAsFinished),
+      concatMap(({ item }) => {
+        const finishedBook = {
+          ...item,
+          finished: true,
+          finishedDate: new Date().toISOString()
+        };
+        return this.http
+          .put(
+            `${okReadsConstant.API.READING_LIST_API}/${item.bookId}/${okReadsConstant.FINISHED}`,
+            finishedBook
+          )
+          .pipe(
+            map(() =>
+              ReadingListActions.confirmedMarkBookAsFinished({
+                item: finishedBook
+              })
+            ),
+            catchError(() =>
+              of(
+                ReadingListActions.failedMarkBookAsFinished({
+                  error: okReadsConstant.ERROR_TEXT
+                })
+              )
+            )
+          );
+      })
     )
   );
 
