@@ -68,7 +68,7 @@ describe('ReadingListComponent', () => {
 
     expect(store.dispatch).toHaveBeenCalledWith(
       removeFromReadingList({
-        item: bookItem
+        item: bookItem, showSnackBar: true
       })
     );
   });
